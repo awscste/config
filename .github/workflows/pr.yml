@@ -22,6 +22,7 @@ jobs:
           export PATH=$OPUS_AGENT_HOME/bin:$PATH
           echo "Update PATH: $PATH"
           echo "Contenets of $OPUS_AGENT_HOME/bin:"
+          ls -la $OPUS_AGENT_HOME/bin
           $OPUS_AGENT_HOME/bin/opencode agent install
 
       - name: Run Opus Agent on PR (Full Repo)
