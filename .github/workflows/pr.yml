@@ -15,13 +15,14 @@ jobs:
 
       - name: Install Opus Agent
         run: |
-          OPUS_AGENT_HOME=$HOME/opencode
-          mkdir -p $OPUS_AGENT_HOME
+          OP_AGENT_HOME=/opencode
+          mkdir -p $OP_AGENT_HOME
           wget -q https://github.com/opencode-ai/opencode/releases/download/v0.0.55/opencode-linux-x86_64.tar.gz -P /tmp
-          tar -xzf /tmp/opencode-linux-x86_64.tar.gz -C $OPUS_AGENT_HOME
-          export PATH=$OPUS_AGENT_HOME:$PATH
+          tar -xzf /tmp/opencode-linux-x86_64.tar.gz -C $OP_AGENT_HOME
+          export PATH=$OP_AGENT_HOME:$PATH
+          ls -la /opencode
 
       - name: Run Opus Agent on PR (Full Repo)
         run: |
           ls -la $OPUS_AGENT_HOME
-          opencode run --code . --prompt --timeout 3600
+          $OP_AGENT_HOME/opencode run --code . --prompt --timeout 3600
