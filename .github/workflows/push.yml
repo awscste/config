@@ -14,3 +14,8 @@ jobs:
       - name: Get changed files
         run: |
           echo "files=$(git diff --name-only HEAD~1 HEAD | tr '\n' ',')"
+
+      - name: Trigger OpenCode Agent via PR comment
+        run: |
+          PR_NUMBER=$(gh pr list --head ${{ github.ref_name }} --json number -q '.[0].number')
+          gh pr comment $PR_NUMBER --body "/opencode review code"
