@@ -22,7 +22,6 @@ jobs:
           export PATH=$OPUS_AGENT_HOME:$PATH
 
       - name: Run Opus Agent on PR (Full Repo)
-        env:
-          OPUS_AGENT_API_KEY: ${{ secrets.OPUS_AGENT_API_KEY }}
         run: |
+          ls -la $OPUS_AGENT_HOME
           opencode run --code . --prompt --timeout 3600
