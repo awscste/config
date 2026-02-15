@@ -15,11 +15,9 @@ jobs:
 
       - name: Install Opus Agent
         run: |
-          curl -fsSL https://raw.githubusercontent.com/opencode-ai/opencode/refs/heads/main/install | bash
-          sudo apt-get install fzf ripgrep
-          echo "$HOME/.opencode/bin" >> $GITHUB_PATH
+          npm install -g opencode-ai
+          sudo apt-get install -y fzf ripgrep
 
       - name: Run Opus Agent on PR (Full Repo)
         run: |
-          export PATH="$HOME/.opencode/bin:$PATH"
           opencode "review code changes in this PR and provide feedback on potential issues, improvements, and best practices. Focus on code quality, security, performance, and maintainability. Provide specific suggestions for any identified problems."
