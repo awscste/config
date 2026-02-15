@@ -18,7 +18,8 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/opencode-ai/opencode/refs/heads/main/install | bash
           source /home/runner/.bashrc
           ls -la /home/runner/.opencode/bin
-          echo $PATH
+          cat /home/runner/.bashrc
+          env
           echo $HOME
           which opencode
           opencode --help
