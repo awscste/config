@@ -13,7 +13,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run OpenCode Review
-        uses: opencode-ai/opencode-action@v1
         with:
           prompt: "review code changes in this push and provide feedback on potential issues, improvements, and best practices."
 
