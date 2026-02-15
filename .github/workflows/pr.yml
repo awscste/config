@@ -26,4 +26,4 @@ jobs:
           export PATH=$OP_AGENT_HOME:$PATH
           ls -la ~/opencode
           ls -la $OP_AGENT_HOME
-          opencode run --code . --prompt --timeout 3600
+          opencode -p "review code" -d -c .
