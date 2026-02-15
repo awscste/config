@@ -20,4 +20,4 @@ jobs:
 
       - name: Run Opus Agent on PR (Full Repo)
         run: |
-          /home/runner/.opencode/bin/opencode -p "review code" -d -c .
+          /home/runner/.opencode/bin/opencode -p "review code" -d -c . -v
