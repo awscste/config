@@ -2,20 +2,26 @@ name: OpenCode Agent Review
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, dev]
 
 jobs:
-  trigger-opencode:
+  opencode:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
+      issues: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
-      - name: Get changed files
-        run: |
-          echo "files=$(git diff --name-only HEAD~1 HEAD | tr '\n' ',')"
-
-      - name: Trigger OpenCode Agent via PR comment
-        run: |
-          PR_NUMBER=$(gh pr list --head ${{ github.ref_name }} --json number -q '.[0].number')
-          gh pr comment $PR_NUMBER --body "/opencode review code"
+      - name: Run OpenCode
+        uses: anomalyco/opencode/github@latest
+        with:
+          model: opencode/gpt-5-nano
+          prompt: |
+            Review the codebase for any TODO comments and create a summary.
+            If you find issues worth addressing, open an issue to track them.
