@@ -22,6 +22,7 @@ jobs:
 
       - name: Run Opus Agent on PR (Full Repo)
         run: |
+          OP_AGENT_HOME=~/opencode
           export PATH=$OP_AGENT_HOME:$PATH
           ls -la ~/opencode
           ls -la $OP_AGENT_HOME
