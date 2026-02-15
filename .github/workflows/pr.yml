@@ -1,0 +1,24 @@
+name: Opus Agent Full Repo PR Code Analysis
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Opus Agent
+        run: |
+          opencode agent install
+
+      - name: Run Opus Agent on PR (Full Repo)
+        env:
+          OPUS_AGENT_API_KEY: ${{ secrets.OPUS_AGENT_API_KEY }}
+        run: |
+          opencode run --code . --prompt --timeout 3600
