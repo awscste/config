@@ -17,6 +17,10 @@ jobs:
         run: |
           curl -fsSL https://raw.githubusercontent.com/opencode-ai/opencode/refs/heads/main/install | bash
           source /home/runner/.bashrc
+          ls -la /home/runner/.opencode/bin
+          echo $PATH
+          echo $HOME
+          which opencode
           opencode --help
 
       - name: Run Opus Agent on PR (Full Repo)
