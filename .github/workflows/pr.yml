@@ -20,4 +20,4 @@ jobs:
 
       - name: Run Opus Agent on PR (Full Repo)
         run: |
-          opencode run --prompt "review code changes in this PR and provide feedback on potential issues, improvements, and best practices. Focus on code quality, security, performance, and maintainability. Provide specific suggestions for any identified problems."
+          opencode run "review code changes in this PR and provide feedback on potential issues, improvements, and best practices. Focus on code quality, security, performance, and maintainability. Provide specific suggestions for any identified problems."
