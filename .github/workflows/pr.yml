@@ -20,10 +20,6 @@ jobs:
           wget -q https://github.com/opencode-ai/opencode/releases/download/v0.0.55/opencode-linux-x86_64.tar.gz -P /tmp
           tar -xzf /tmp/opencode-linux-x86_64.tar.gz -C $OPUS_AGENT_HOME
           export PATH=$OPUS_AGENT_HOME:$PATH
-          echo "Update PATH: $PATH"
-          echo "Contenets of $OPUS_AGENT_HOME:"
-          ls -la $OPUS_AGENT_HOME
-          opencode agent install
 
       - name: Run Opus Agent on PR (Full Repo)
         env:
