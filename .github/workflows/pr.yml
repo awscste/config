@@ -21,8 +21,10 @@ jobs:
           tar -xzf /tmp/opencode-linux-x86_64.tar.gz -C $OP_AGENT_HOME
           export PATH=$OP_AGENT_HOME:$PATH
           ls -la ~/opencode
+          ls -la $OP_AGENT_HOME
 
       - name: Run Opus Agent on PR (Full Repo)
         run: |
-          ls -la $OPUS_AGENT_HOME
+          ls -la ~/opencode
+          ls -la $OP_AGENT_HOME
           $OP_AGENT_HOME/opencode run --code . --prompt --timeout 3600
