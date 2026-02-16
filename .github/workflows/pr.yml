@@ -33,22 +33,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create PR Review (Files Changed tab)
-        with:
-          model: opencode/gpt-5-nano
         run: |
           PR_NUM=${{ github.event.pull_request.number }}
           SHA=${{ github.event.pull_request.head.sha }}
-          opencode run "Review code changes in this PR. Provide feedback on code quality, security, performance, and best practices. Focus on these files: ${{ steps.files.outputs.files }}" | tee review_output.txt
-          REVIEW_BODY=$(cat review_output.txt)
           gh pr review $PR_NUM \
-          --body "$REVIEW_BODY" \
+          --body "OpenCode has reviewed this PR. Check individual file comments for detailed feedback." \
           --comment
           FIRST_FILE=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | head -1)
           if [ -n "$FIRST_FILE" ]; then
-          SUMMARY="OpenCode review: Check the general review comment for detailed feedback on code quality, security, and best practices."
+          COMMENT=$(opencode run review: Review code changes in this PR. Provide feedback on code quality, security, performance, and best practices. Focus on these files: $FIRST_FILE")
           gh api repos/${{ github.repository }}/pulls/$PR_NUM/comments \
           --method POST \
-          --field body="$SUMMARY" \
+          --field body="$COMMENT" \
           --field commit_id=$SHA \
           --field path="$FIRST_FILE" \
           --field line=1
