@@ -35,7 +35,7 @@ jobs:
       - name: Create PR Review (Files Changed tab)
         run: |
           gh pr review ${{ github.event.pull_request.number }} \
-            --body "OpenCode has reviewed this PR..." \
+            --body "/opencode reviewed this PR. Provide feedback on code quality, security, performance, and best practices by adding comment on the line of related file. " \
             --comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
