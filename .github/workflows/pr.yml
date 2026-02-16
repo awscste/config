@@ -36,6 +36,6 @@ jobs:
         run: |
           gh pr review ${{ github.event.pull_request.number }} \
             --body "OpenCode has reviewed this PR..." \
-            --event COMMENT
+            --comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
