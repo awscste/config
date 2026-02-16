@@ -43,7 +43,7 @@ jobs:
           if [ -n "$FIRST_FILE" ]; then
           gh pr comment $PR_NUM \
           --body "OpenCode review: Consider reviewing this file for code quality and security improvements." \
-          --commit-sha $SHA \
+          --commit $SHA \
           --path "$FIRST_FILE" \
           --line 1
           fi
