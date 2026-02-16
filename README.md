@@ -1,3 +1,3 @@
 # config
 
-Go Project Template
+Go Project
