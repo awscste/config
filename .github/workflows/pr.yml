@@ -33,6 +33,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create PR Review (Files Changed tab)
+        with:
+          model: opencode/gpt-5-nano
         run: |
           PR_NUM=${{ github.event.pull_request.number }}
           SHA=${{ github.event.pull_request.head.sha }}
