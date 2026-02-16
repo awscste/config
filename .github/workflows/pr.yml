@@ -41,7 +41,7 @@ jobs:
           --comment
           FIRST_FILE=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | head -1)
           if [ -n "$FIRST_FILE" ]; then
-          COMMENT=$(opencode run review: Review code changes in this PR. Provide feedback on code quality, security, performance, and best practices. Focus on these files: $FIRST_FILE")
+          COMMENT=$(opencode run review: Review code changes in this PR. Provide feedback on code quality, security, performance, and best practices. Focus on these files: $FIRST_FILE)
           gh api repos/${{ github.repository }}/pulls/$PR_NUM/comments \
           --method POST \
           --field body="$COMMENT" \
