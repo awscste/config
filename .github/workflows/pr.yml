@@ -13,11 +13,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Opus Agent
-        run: |
-          npm install -g opencode-ai
-          sudo apt-get install -y fzf ripgrep
-
       - name: Run Opus Agent on PR (Full Repo)
-        run: |
-          opencode run "review code changes in this PR and provide feedback on potential issues, improvements, and best practices. Focus on code quality, security, performance, and maintainability. Provide specific suggestions for any identified problems."
+        uses: anomalyco/opencode/github@latest
+        with:
+          model: opencode/gpt-5-nano
+          prompt: |
+            opencode run "review code changes in this PR and provide feedback on potential issues, improvements, and best practices. Focus on code quality, security, performance, and maintainability. Provide specific suggestions for any identified problems. If you find any critical issues, create comments for this pull request to track them. Additionally, summarize the overall quality of the code changes and suggest any areas for improvement."
