@@ -20,10 +20,22 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
+      - name: Get changed files
+        run: |
+          echo "files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | tr '\n' ',')" >> $GITHUB_OUTPUT
+
       - name: Run Opus Agent on PR (Full Repo)
         uses: anomalyco/opencode/github@latest
         with:
           model: opencode/gpt-5-nano
-          prompt: Review code changes in this PR. Provide feedback on code quality, security, performance, and best practices.
+          prompt: "Review code changes in this PR. Provide feedback on code quality, security, performance, and best practices. Focus on these files: ${{ steps.files.outputs.files }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create PR Review (Files Changed tab)
+        run: |
+          gh pr review ${{ github.event.pull_request.number }} \
+            --body "OpenCode has reviewed this PR..." \
+            --event COMMENT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
