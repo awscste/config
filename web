@@ -1,0 +1,15 @@
+func ()  {
+	
+}
+
+make(type, 0)
+
+for i := 0; i < count; i++ {
+	
+}
+
+if condition {
+	// do something
+} else {
+	// do something else
+}		
