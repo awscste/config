@@ -27,3 +27,5 @@ jobs:
           prompt: |
             Review the codebase for any TODO comments and create a summary.
             If you find issues worth addressing, open an issue to track them.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
