@@ -9,7 +9,7 @@ on:
 jobs:
   analyze:
     outputs:
-      results: ${{ steps.analyze.outputs.response }}
+      results: ${{ steps.opus.outputs.response }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -51,7 +51,7 @@ jobs:
           if [ -n "$FIRST_FILE" ]; then
           gh api repos/${{ github.repository }}/pulls/$PR_NUM/comments \
           --method POST \
-          --field body=${{ steps.analyze.outputs.response }} \
+          --field body="${{ steps.opus.outputs.response }}" \
           --field commit_id=$SHA \
           --field path="$FIRST_FILE" \
           --field line=1
