@@ -8,8 +8,6 @@ on:
 
 jobs:
   analyze:
-    outputs:
-      results: ${{ steps.opus.outputs.response }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -33,13 +31,7 @@ jobs:
           prompt: "Review code changes in this PR. Provide feedback on code quality, security, performance, and best practices. Focus on these files: ${{ steps.files.outputs.files }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  comment:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      id-token: write
-    steps:
+
       - name: Create PR Review (Files Changed tab)
         run: |
           PR_NUM=${{ github.event.pull_request.number }}
@@ -49,9 +41,12 @@ jobs:
           --comment
           FIRST_FILE=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | head -1)
           if [ -n "$FIRST_FILE" ]; then
+          opencode run "Review the code changes in file: $FIRST_FILE." 2>&1 | tee file_review.txt
+          cat file_review.txt
+          COMMENT_BODY=$(cat file_review.txt)
           gh api repos/${{ github.repository }}/pulls/$PR_NUM/comments \
           --method POST \
-          --field body="${{ steps.opus.outputs.response }}" \
+          --field body="$COMMENT_BODY" \
           --field commit_id=$SHA \
           --field path="$FIRST_FILE" \
           --field line=1
